@@ -1,0 +1,6 @@
+<div class="container">
+  <div class="images" (scroll)="onScroll($event)" data-test="photos">
+    <app-img [src]="photo.url" *ngFor="let photo of showingPhotos"></app-img>
+  </div>
+  <mat-spinner *ngIf="loading"></mat-spinner>
+</div>

@@ -8,9 +8,8 @@ describe('HeaderComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ HeaderComponent ]
-    })
-    .compileComponents();
+      imports: [HeaderComponent]
+    }).compileComponents();
 
     fixture = TestBed.createComponent(HeaderComponent);
     component = fixture.componentInstance;
@@ -19,5 +18,13 @@ describe('HeaderComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should show photos button', () => {
+    expect(fixture.nativeElement.querySelector('[data-test="photos"]')).toBeTruthy();
+  });
+
+  it('should show favorites button', () => {
+    expect(fixture.nativeElement.querySelector('[data-test="favorites"]')).toBeTruthy();
   });
 });

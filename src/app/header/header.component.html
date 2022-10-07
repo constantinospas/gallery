@@ -1,1 +1,12 @@
-<p>header works!</p>
+<mat-card class="container">
+  <div class="buttons">
+    <a [routerLinkActive]="['active']" data-test="photos" type="button" [routerLink]="'/'"
+       [routerLinkActiveOptions]="{exact: true}">
+      <button mat-raised-button color="primary">Photos</button>
+    </a>
+    <a [routerLinkActive]="['active']" data-test="favorites" type="button" [routerLink]="'/favorites'"
+       [routerLinkActiveOptions]="{exact: true}">
+      <button mat-raised-button color="primary">Favorites</button>
+    </a>
+  </div>
+</mat-card>

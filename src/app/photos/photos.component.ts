@@ -6,6 +6,7 @@ import { Store } from '@ngrx/store';
 import { FavoritesState } from '../store/favorites/favorites.reducer';
 import { addFavorite } from '../store/favorites/favorites.actions';
 import { AppState } from '../store/app.state';
+import { SnackBarServiceService } from '../services/snack-bar-service.service';
 
 @Component({
   selector: 'app-photos',
@@ -19,7 +20,7 @@ export class PhotosComponent implements OnInit {
   showingPhotos: any = [];
   loading: boolean = false;
 
-  constructor(private photosService: PhotosService, private store: Store<AppState>) {
+  constructor(private photosService: PhotosService, private store: Store<AppState>, private snackbar: SnackBarServiceService) {
     this.favorites$ = store.select('favorites');
   }
 
@@ -63,6 +64,7 @@ export class PhotosComponent implements OnInit {
   }
 
   favorite(src: string) {
+    this.snackbar.show('Added to favorites');
     this.store.dispatch(addFavorite({ src }));
   }
 }

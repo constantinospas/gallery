@@ -28,7 +28,6 @@ export class PhotoComponent  {
         this.photo = store.favorites.find((favorite: any) => {
           return favorite.img.id === this.id;
         });
-        console.log(this.photo);
       });
     });
   }

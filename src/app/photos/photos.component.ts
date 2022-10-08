@@ -17,13 +17,15 @@ export class PhotosComponent implements OnInit, AfterViewInit {
   @ViewChild('images') imageContainerEl: any;
   @ViewChild('trigger') triggerEl: any;
 
-  favorites$: Observable<FavoritesState>;
+  favoritePhotos: any = [];
   photos$: any;
   showingPhotos: IPhotoModel[] = [];
   loading: boolean = false;
 
   constructor(private photosService: PhotosService, private store: Store<AppState>, private snackbar: SnackBarServiceService) {
-    this.favorites$ = store.select('favorites');
+    store.select('favorites').subscribe(p => {
+      this.favoritePhotos = p.favorites;
+    });
   }
 
   ngOnInit(): void {
@@ -73,6 +75,11 @@ export class PhotosComponent implements OnInit, AfterViewInit {
   }
 
   favorite(img: IPhotoModel) {
+    const isFavorite = this.favoritePhotos.find((favorite: any) => favorite.img.id === img.id);
+    if (isFavorite) {
+      this.snackbar.show('Already in favorites');
+      return;
+    }
     this.store.dispatch(addFavorite({ img }));
     this.snackbar.show('Added to favorites');
   }

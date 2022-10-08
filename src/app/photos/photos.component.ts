@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { PhotosService } from '../services/photos.service';
 import { delay, map, Observable, of } from 'rxjs';
 import { IPhotoModel } from './photo.model';
@@ -13,10 +13,13 @@ import { SnackBarServiceService } from '../services/snack-bar-service.service';
   templateUrl: './photos.component.html',
   styleUrls: ['./photos.component.scss']
 })
-export class PhotosComponent implements OnInit {
+export class PhotosComponent implements OnInit, AfterViewInit {
+  @ViewChild('images') imageContainerEl: any;
+  @ViewChild('trigger') triggerEl: any;
+
   favorites$: Observable<FavoritesState>;
   start = 18;
-  photos$: any = [];
+  photos$: any;
   showingPhotos: any = [];
   loading: boolean = false;
 
@@ -26,6 +29,22 @@ export class PhotosComponent implements OnInit {
 
   ngOnInit(): void {
     this.fetchAll();
+  }
+
+  ngAfterViewInit() {
+    const obs = new IntersectionObserver(() => {
+      this.loading = true;
+      this.fetchNextBatch();
+      console.log(this.showingPhotos);
+    }, {
+      root: this.imageContainerEl.nativeElement,
+      rootMargin: '500px',
+      threshold: 1.0
+    });
+
+    let target = this.triggerEl.nativeElement;
+    obs.observe(target);
+
   }
 
   fetchAll() {
@@ -39,12 +58,13 @@ export class PhotosComponent implements OnInit {
     ).subscribe(list => {
       //create an observable for all the images and set the 18 first on the page
       this.photos$ = of(list);
+      console.log(list);
       this.showingPhotos = list.slice(0, 18);
     });
   }
 
   fetchNextBatch() {
-    this.photos$.pipe(
+    this.photos$?.pipe(
       delay(Math.random() * (350 - 250) + 250), //random delay
       map((list: any) => list.splice(this.start, 18)) //get next 18
     ).subscribe((list: IPhotoModel[]) => {
@@ -52,15 +72,6 @@ export class PhotosComponent implements OnInit {
       this.start += 18;
       this.loading = false;
     });
-  }
-
-  onScroll(event: any) {
-    const { scrollTop, clientHeight, scrollHeight } = event.target;
-    //maybe intersection observer would be better
-    if (scrollTop + clientHeight === scrollHeight) {
-      this.loading = true;
-      this.fetchNextBatch();
-    }
   }
 
   favorite(src: string) {

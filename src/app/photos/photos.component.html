@@ -1,6 +1,7 @@
 <div class="container">
-  <div class="images" (scroll)="onScroll($event)" data-test="photos">
+  <div class="images" data-test="photos" #images>
     <app-img (click)="favorite(photo.url)" [src]="photo.url" *ngFor="let photo of showingPhotos"></app-img>
+    <div class="trigger" #trigger></div>
   </div>
   <mat-spinner *ngIf="loading"></mat-spinner>
 </div>

@@ -55,8 +55,9 @@ export class PhotosComponent implements OnInit, AfterViewInit {
       )
     ).subscribe(list => {
       //create an observable for all the images and set the 18 first on the page
+      list = list.sort((imgA: IPhotoModel, imgB: IPhotoModel) => imgA.id - imgB.id);
       this.photos$ = of(list);
-      this.showingPhotos = list.slice(0, 18);
+      this.fetchNextBatch();
     });
   }
 

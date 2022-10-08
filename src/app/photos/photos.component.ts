@@ -19,7 +19,7 @@ export class PhotosComponent implements OnInit, AfterViewInit {
 
   favorites$: Observable<FavoritesState>;
   photos$: any;
-  showingPhotos: any = [];
+  showingPhotos: IPhotoModel[] = [];
   loading: boolean = false;
 
   constructor(private photosService: PhotosService, private store: Store<AppState>, private snackbar: SnackBarServiceService) {

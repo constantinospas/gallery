@@ -7,5 +7,5 @@ export interface IPhotoModel {
   filename: string;
   post_url: string;
   author_url: string;
-  url?: string;
+  url: string;
 }

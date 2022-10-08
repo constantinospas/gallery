@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { PhotoComponent } from './photo/photo.component';
 
 const routes: Routes = [
   {
@@ -10,7 +11,7 @@ const routes: Routes = [
     path: 'favorites', loadChildren: () => import('./favorites/favorites.module').then(m => m.FavoritesModule)
   },
 
-  // {path: 'photos/:id', component: PhotoComponent}
+  { path: 'photos/:id', component: PhotoComponent }
 ];
 
 @NgModule({

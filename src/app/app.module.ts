@@ -11,6 +11,7 @@ import { favoritesReducer } from './store/favorites/favorites.reducer';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AppState } from './store/app.state';
 import { localStorageSync } from 'ngrx-store-localstorage';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 const reducers: ActionReducerMap<AppState> = { favorites: favoritesReducer };
 
@@ -30,6 +31,7 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    MatSnackBarModule,
     StoreModule.forRoot(reducers, { metaReducers }),
     StoreDevtoolsModule.instrument({
       maxAge: 50

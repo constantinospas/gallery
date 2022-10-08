@@ -32,7 +32,7 @@ export class PhotosComponent implements OnInit {
     this.photosService.getList().pipe(
       map((list: any) =>
         list.map((photo: IPhotoModel) => {
-          photo.url = `https://picsum.photos/id/${photo.id}/${photo.width}/${photo.height}`;
+          photo.url = `https://picsum.photos/id/${photo.id}/${Math.floor(photo.width / 5)}/${Math.floor(photo.height / 5)}`;
           return photo;
         })
       )

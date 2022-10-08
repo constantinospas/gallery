@@ -6,6 +6,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../../store/app.state';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { removeFavorite } from '../../store/favorites/favorites.actions';
+import { SnackBarServiceService } from '../../services/snack-bar-service.service';
 
 @Component({
   selector: 'app-photo',
@@ -18,7 +19,8 @@ export class PhotoComponent implements OnInit {
   photo: any;
   id: number = 0;
 
-  constructor(private store: Store<AppState>, private route: ActivatedRoute, private router: Router) {
+  constructor(private store: Store<AppState>, private route: ActivatedRoute, private router: Router,
+    private snackbar: SnackBarServiceService) {
     route.params.subscribe(params => {
       this.id = params['id'];
       store.select('favorites').subscribe(store => {
@@ -32,6 +34,7 @@ export class PhotoComponent implements OnInit {
 
   remove() {
     this.store.dispatch(removeFavorite({ id: this.id }));
+    this.snackbar.show('Removed from favorites');
     this.router.navigate(['favorites']);
   }
 

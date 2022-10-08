@@ -27,4 +27,8 @@ describe('PhotoComponent', () => {
   it('should contain the remove button', () => {
     expect(fixture.nativeElement.querySelector('[data-test="remove-button"]')).toBeTruthy();
   });
+
+  it('should show snackbar on delete', () => {
+    //todo
+  });
 });

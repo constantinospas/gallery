@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { PhotosService } from '../services/photos.service';
-import { delay, map, Observable, of } from 'rxjs';
+import { delay, map, Observable, of, take } from 'rxjs';
 import { IPhotoModel } from './photo.model';
 import { Store } from '@ngrx/store';
 import { FavoritesState } from '../store/favorites/favorites.reducer';
@@ -18,7 +18,6 @@ export class PhotosComponent implements OnInit, AfterViewInit {
   @ViewChild('trigger') triggerEl: any;
 
   favorites$: Observable<FavoritesState>;
-  start = 18;
   photos$: any;
   showingPhotos: any = [];
   loading: boolean = false;
@@ -35,7 +34,6 @@ export class PhotosComponent implements OnInit, AfterViewInit {
     const obs = new IntersectionObserver(() => {
       this.loading = true;
       this.fetchNextBatch();
-      console.log(this.showingPhotos);
     }, {
       root: this.imageContainerEl.nativeElement,
       rootMargin: '500px',
@@ -58,7 +56,6 @@ export class PhotosComponent implements OnInit, AfterViewInit {
     ).subscribe(list => {
       //create an observable for all the images and set the 18 first on the page
       this.photos$ = of(list);
-      console.log(list);
       this.showingPhotos = list.slice(0, 18);
     });
   }
@@ -66,16 +63,16 @@ export class PhotosComponent implements OnInit, AfterViewInit {
   fetchNextBatch() {
     this.photos$?.pipe(
       delay(Math.random() * (350 - 250) + 250), //random delay
-      map((list: any) => list.splice(this.start, 18)) //get next 18
+      take(18),
+      map((list: any) => list.splice(0, 18)) //get next 18
     ).subscribe((list: IPhotoModel[]) => {
       this.showingPhotos.push(...list);
-      this.start += 18;
       this.loading = false;
     });
   }
 
   favorite(src: string) {
-    this.snackbar.show('Added to favorites');
     this.store.dispatch(addFavorite({ src }));
+    this.snackbar.show('Added to favorites');
   }
 }

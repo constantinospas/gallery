@@ -1,3 +1,6 @@
-<img [src]="src" (error)="onError()" [alt]="alt" loading="lazy" data-test="image"
-     [ngStyle]="{'max-width': width, 'max-height': height, 'object-fit': 'contain'}"
-     [ngClass]="{'rounded': rounded}">
+<div class="container">
+  <img [src]="src" (error)="onError()" [alt]="alt" loading="lazy" data-test="image"
+       [ngStyle]="{'max-width': width, 'max-height': height, 'object-fit': 'contain'}"
+       [ngClass]="{'rounded': rounded}">
+  <ng-content></ng-content>
+</div>

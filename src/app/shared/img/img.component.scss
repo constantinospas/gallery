@@ -1,7 +1,14 @@
-img {
-  user-select: none;
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
-  &.rounded {
-    border-radius: 50%;
+  img {
+    user-select: none;
+    margin-bottom: 1vh;
+
+    &.rounded {
+      border-radius: 50%;
+    }
   }
 }

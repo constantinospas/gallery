@@ -7,6 +7,7 @@ import { AppState } from '../../store/app.state';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { removeFavorite } from '../../store/favorites/favorites.actions';
 import { SnackBarServiceService } from '../../services/snack-bar-service.service';
+import { IPhotoModel } from '../photo.model';
 
 @Component({
   selector: 'app-photo',
@@ -15,21 +16,21 @@ import { SnackBarServiceService } from '../../services/snack-bar-service.service
   templateUrl: './photo.component.html',
   styleUrls: ['./photo.component.scss']
 })
-export class PhotoComponent implements OnInit {
+export class PhotoComponent  {
   photo: any;
   id: number = 0;
 
   constructor(private store: Store<AppState>, private route: ActivatedRoute, private router: Router,
     private snackbar: SnackBarServiceService) {
     route.params.subscribe(params => {
-      this.id = params['id'];
+      this.id = +params['id'];
       store.select('favorites').subscribe(store => {
-        this.photo = store.favorites[this.id];
+        this.photo = store.favorites.find((favorite: any) => {
+          return favorite.img.id === this.id;
+        });
+        console.log(this.photo);
       });
     });
-  }
-
-  ngOnInit(): void {
   }
 
   remove() {

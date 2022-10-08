@@ -17,7 +17,4 @@ export const favoritesReducer = createReducer(
   on(FavoritesActions.removeFavorite, (state, { src }) => ({
     ...state, favorites: state.favorites.filter(image => image.src !== src)
   })),
-  on(FavoritesActions.loadFavorites, (state) => ({
-    ...state, status: 'loading'
-  }))
 );

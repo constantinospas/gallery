@@ -3,6 +3,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { PhotosComponent } from './photos.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientModule } from '@angular/common/http';
+import { provideMockStore } from '@ngrx/store/testing';
+import { initialState } from '../store/favorites/favorites.reducer';
 
 describe('PhotosComponent', () => {
   let component: PhotosComponent;
@@ -11,7 +13,10 @@ describe('PhotosComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [PhotosComponent],
-      imports: [RouterTestingModule, HttpClientModule]
+      imports: [RouterTestingModule, HttpClientModule],
+      providers:[
+        provideMockStore({initialState})
+      ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(PhotosComponent);
@@ -25,9 +30,6 @@ describe('PhotosComponent', () => {
 
   it('should should show photos', () => {
     expect(fixture.nativeElement.querySelector('[data-test="photos"]')).toBeTruthy();
-  });
-
-  it('should should show photos', () => {
   });
 
 });

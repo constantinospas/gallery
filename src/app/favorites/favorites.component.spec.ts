@@ -34,4 +34,18 @@ describe('FavoritesComponent', () => {
     //fixme
     expect(fixture.nativeElement.querySelector('[data-test="message"]')).toBeTruthy();
   });
+
+  it('should redirect to photo', () => {
+    //todo
+  });
+
+  it('should remove photo from favorites', () => {
+    //todo
+  });
+
+  it('should navigate to favorites after removing', () => {
+    //todo
+  });
+
+
 });

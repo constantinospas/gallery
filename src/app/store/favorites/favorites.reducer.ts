@@ -12,14 +12,15 @@ export const initialState: FavoritesState = {
 };
 
 export const favoritesReducer = createReducer(
-  initialState,
-  on(FavoritesActions.addFavorite, (state, { src }) => ({
-    ...state, favorites: [...state.favorites, { src }]
-  })),
-  on(FavoritesActions.removeFavorite, (state, { src }) => ({
-    ...state, favorites: state.favorites.filter(image => image.src !== src)
-  }))
-);
+    initialState,
+    on(FavoritesActions.addFavorite, (state, { src }) => ({
+      ...state, favorites: [...state.favorites, { src }]
+    })),
+    on(FavoritesActions.removeFavorite, (state, { id }) => ({
+      ...state, favorites: state.favorites.filter((image, idx) => idx !== +id)
+    }))
+  )
+;
 
 export const metaReducers: MetaReducer<AppState>[] = environment.production ? [] : [debug];
 

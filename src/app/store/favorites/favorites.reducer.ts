@@ -13,8 +13,8 @@ export const initialState: FavoritesState = {
 
 export const favoritesReducer = createReducer(
     initialState,
-    on(FavoritesActions.addFavorite, (state, { src }) => ({
-      ...state, favorites: [...state.favorites, { src }]
+    on(FavoritesActions.addFavorite, (state, { img }) => ({
+      ...state, favorites: [...state.favorites, { img }]
     })),
     on(FavoritesActions.removeFavorite, (state, { id }) => ({
       ...state, favorites: state.favorites.filter((image, idx) => idx !== +id)

@@ -71,8 +71,8 @@ export class PhotosComponent implements OnInit, AfterViewInit {
     });
   }
 
-  favorite(src: string) {
-    this.store.dispatch(addFavorite({ src }));
+  favorite(img: IPhotoModel) {
+    this.store.dispatch(addFavorite({ img }));
     this.snackbar.show('Added to favorites');
   }
 }

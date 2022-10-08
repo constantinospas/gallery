@@ -1,6 +1,8 @@
 <div class="container">
   <div data-test="images" class="image-grid" *ngIf="photos?.length">
-    <app-img (click)="open(i)" [src]="favorite.src" *ngFor="let favorite of photos;let i = index"></app-img>
+    <app-img (click)="open(i)" [src]="favorite.img.url" *ngFor="let favorite of photos;let i = index">
+      {{favorite.img.author}}
+    </app-img>
   </div>
   <div data-test="message" class="no-images" *ngIf="photos?.length === 0">
     No photos in favorites yet.

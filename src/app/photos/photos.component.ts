@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { PhotosService } from '../services/photos.service';
-import { debounceTime, delay, map, of, take, throttle, throttleTime } from 'rxjs';
+import { delay, map, Observable, of } from 'rxjs';
 import { IPhotoModel } from './photo.model';
+import { Store } from '@ngrx/store';
+import { FavoritesState } from '../store/favorites/favorites.reducer';
+import { addFavorite } from '../store/favorites/favorites.actions';
+import { AppState } from '../store/app.state';
 
 @Component({
   selector: 'app-photos',
@@ -9,12 +13,15 @@ import { IPhotoModel } from './photo.model';
   styleUrls: ['./photos.component.scss']
 })
 export class PhotosComponent implements OnInit {
+  favorites$: Observable<FavoritesState>;
   start = 18;
   photos$: any = [];
   showingPhotos: any = [];
   loading: boolean = false;
 
-  constructor(private photosService: PhotosService) { }
+  constructor(private photosService: PhotosService, private store: Store<AppState>) {
+    this.favorites$ = store.select('favorites');
+  }
 
   ngOnInit(): void {
     this.fetchAll();
@@ -48,10 +55,14 @@ export class PhotosComponent implements OnInit {
 
   onScroll(event: any) {
     const { scrollTop, clientHeight, scrollHeight } = event.target;
-
+    //maybe intersection observer would be better
     if (scrollTop + clientHeight === scrollHeight) {
       this.loading = true;
       this.fetchNextBatch();
     }
+  }
+
+  favorite(src: string) {
+    this.store.dispatch(addFavorite({ src }));
   }
 }

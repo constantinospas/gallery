@@ -1,7 +1,7 @@
 <div class="container">
   <div data-test="images" class="image-grid" *ngIf="photos?.length">
     <app-img (click)="open(favorite.img.id)" [src]="favorite.img.url" *ngFor="let favorite of photos;let i = index">
-      {{favorite.img.author}}
+      By {{favorite.img.author}}
     </app-img>
   </div>
   <div data-test="message" class="no-images" *ngIf="photos?.length === 0">

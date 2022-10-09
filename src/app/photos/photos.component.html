@@ -1,7 +1,7 @@
 <div class="container">
   <div class="images" data-test="photos" #images>
     <app-img (click)="favorite(photo)" [src]="photo.url" *ngFor="let photo of showingPhotos">
-      {{photo.author}}
+      By {{photo.author}}
     </app-img>
     <div class="trigger" #trigger></div>
   </div>

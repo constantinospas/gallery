@@ -69,6 +69,9 @@ export class PhotosComponent implements OnInit, AfterViewInit {
       take(18),
       map((list: any) => list.splice(0, 18)) //get next 18
     ).subscribe((list: IPhotoModel[]) => {
+      if (list.length === 0) {
+        this.fetchAll();
+      }
       this.showingPhotos.push(...list);
       this.loading = false;
     });

@@ -57,8 +57,8 @@ describe('PhotosComponent', () => {
     expect(fixture.nativeElement.querySelector('[data-test="photos"]')).toBeTruthy();
   });
 
-  it('should fetch photos', () => {
-    const photoServiceSpy = spyOn(photosService, 'getList')
+  it('should fetch photos on init', () => {
+    const photoServiceSpy = spyOn(photosService, 'getList').and.callThrough()
     component.ngOnInit()
     expect(photoServiceSpy).toHaveBeenCalled()
   });

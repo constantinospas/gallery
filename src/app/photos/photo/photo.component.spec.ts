@@ -1,6 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PhotoComponent } from './photo.component';
+import { provideMockStore } from '@ngrx/store/testing';
+import { initialState } from '../../store/favorites/favorites.reducer';
+import { RouterTestingModule } from '@angular/router/testing';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 describe('PhotoComponent', () => {
   let component: PhotoComponent;
@@ -8,7 +12,10 @@ describe('PhotoComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [PhotoComponent]
+      imports: [PhotoComponent, RouterTestingModule, MatSnackBarModule],
+      providers:[
+        provideMockStore({initialState})
+      ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(PhotoComponent);

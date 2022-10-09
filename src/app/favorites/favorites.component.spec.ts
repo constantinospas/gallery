@@ -26,12 +26,14 @@ describe('FavoritesComponent', () => {
   });
 
   it('should show favorite images', () => {
-    //fixme
+    component.photos = [{img:{}}];
+    fixture.detectChanges();
     expect(fixture.nativeElement.querySelector('[data-test="images"]')).toBeTruthy();
   });
 
   it('should show message', () => {
-    //fixme
+    component.photos = [];
+    fixture.detectChanges();
     expect(fixture.nativeElement.querySelector('[data-test="message"]')).toBeTruthy();
   });
 
@@ -46,6 +48,5 @@ describe('FavoritesComponent', () => {
   it('should navigate to favorites after removing', () => {
     //todo
   });
-
 
 });

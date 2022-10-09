@@ -5,6 +5,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientModule } from '@angular/common/http';
 import { provideMockStore } from '@ngrx/store/testing';
 import { initialState } from '../store/favorites/favorites.reducer';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 describe('PhotosComponent', () => {
   let component: PhotosComponent;
@@ -13,7 +14,7 @@ describe('PhotosComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [PhotosComponent],
-      imports: [RouterTestingModule, HttpClientModule],
+      imports: [RouterTestingModule, HttpClientModule, MatSnackBarModule],
       providers:[
         provideMockStore({initialState})
       ]

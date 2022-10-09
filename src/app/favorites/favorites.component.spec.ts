@@ -48,6 +48,4 @@ describe('FavoritesComponent', () => {
     component.open(1);
     expect(navSpy).toHaveBeenCalledWith(['photos/1']);
   }));
-
-
 });

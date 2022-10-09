@@ -65,10 +65,9 @@ describe('PhotoComponent', () => {
     expect(storeSpy).toHaveBeenCalledWith(Object({ id: NaN, type: '[Favorites] Remove' }));
   });
 
-  it('should navigate to favorites after removing', fakeAsync(() => {
+  it('should navigate to favorites after removing', () => {
     const navigationSpy = spyOn(router, 'navigate');
     fixture.nativeElement.querySelector('[data-test="remove-button"]').click();
-    tick();
-    expect(navigationSpy).toHaveBeenCalled();
-  }));
+    expect(navigationSpy).toHaveBeenCalledWith(['favorites']);
+  });
 });

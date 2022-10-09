@@ -29,6 +29,4 @@ describe('ImgComponent', () => {
     expect(img.src).toBe('invalid');
     expect(img.alt).toBe('https://placekitten.com/200/300');
   });
-
-
 });

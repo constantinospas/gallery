@@ -34,8 +34,8 @@ export class PhotoComponent  {
 
   remove() {
     this.store.dispatch(removeFavorite({ id: this.id }));
-    this.snackbar.show('Removed from favorites');
     this.router.navigate(['favorites']);
+    this.snackbar.show('Removed from favorites');
   }
 
 }

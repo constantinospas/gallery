@@ -36,5 +36,4 @@ describe('PhotosComponent', () => {
   it('should favorite a photo', () => {
     expect(fixture.nativeElement.querySelector('[data-test="photos"]')).toBeTruthy();
   });
-
 });

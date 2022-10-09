@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { PhotosComponent } from './photos.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientModule } from '@angular/common/http';
-import { provideMockStore } from '@ngrx/store/testing';
+import { getMockStore, provideMockStore } from '@ngrx/store/testing';
 import { initialState } from '../store/favorites/favorites.reducer';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 
@@ -15,8 +15,8 @@ describe('PhotosComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [PhotosComponent],
       imports: [RouterTestingModule, HttpClientModule, MatSnackBarModule],
-      providers:[
-        provideMockStore({initialState})
+      providers: [
+        provideMockStore({ initialState })
       ]
     }).compileComponents();
 
@@ -30,6 +30,10 @@ describe('PhotosComponent', () => {
   });
 
   it('should should show photos', () => {
+    expect(fixture.nativeElement.querySelector('[data-test="photos"]')).toBeTruthy();
+  });
+
+  it('should favorite a photo', () => {
     expect(fixture.nativeElement.querySelector('[data-test="photos"]')).toBeTruthy();
   });
 

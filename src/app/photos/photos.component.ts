@@ -6,7 +6,7 @@ import { Store } from '@ngrx/store';
 import { FavoritesState } from '../store/favorites/favorites.reducer';
 import { addFavorite } from '../store/favorites/favorites.actions';
 import { AppState } from '../store/app.state';
-import { SnackBarServiceService } from '../services/snack-bar-service.service';
+import { SnackBarService } from '../services/snack-bar.service';
 
 @Component({
   selector: 'app-photos',
@@ -22,7 +22,7 @@ export class PhotosComponent implements OnInit, AfterViewInit {
   showingPhotos: IPhotoModel[] = [];
   loading: boolean = false;
 
-  constructor(private photosService: PhotosService, private store: Store<AppState>, private snackbar: SnackBarServiceService) {
+  constructor(private photosService: PhotosService, private store: Store<AppState>, private snackbar: SnackBarService) {
     store.select('favorites').subscribe(p => {
       this.favoritePhotos = p.favorites;
     });

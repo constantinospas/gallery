@@ -16,11 +16,4 @@ describe('PhotosService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
-
-  it('should fetch all photos', () => {
-    service.getList().subscribe((list: any) => {
-      expect(list.length > 0).toBeTrue();
-    });
-  });
-
 });

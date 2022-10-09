@@ -6,7 +6,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../../store/app.state';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { removeFavorite } from '../../store/favorites/favorites.actions';
-import { SnackBarServiceService } from '../../services/snack-bar-service.service';
+import { SnackBarService } from '../../services/snack-bar.service';
 import { IPhotoModel } from '../photo.model';
 
 @Component({
@@ -21,7 +21,7 @@ export class PhotoComponent  {
   id: number = 0;
 
   constructor(private store: Store<AppState>, private route: ActivatedRoute, private router: Router,
-    private snackbar: SnackBarServiceService) {
+    private snackbar: SnackBarService) {
     route.params.subscribe(params => {
       this.id = +params['id'];
       store.select('favorites').subscribe(store => {

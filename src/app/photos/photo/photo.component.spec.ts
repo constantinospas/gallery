@@ -9,21 +9,21 @@ import { routes } from '../../app-routing.module';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { removeFavorite } from '../../store/favorites/favorites.actions';
-import { SnackBarServiceService } from '../../services/snack-bar-service.service';
+import { SnackBarService } from '../../services/snack-bar.service';
 
 describe('PhotoComponent', () => {
   let component: PhotoComponent;
   let fixture: ComponentFixture<PhotoComponent>;
   let router: Router;
   let store: Store;
-  let snackbar: SnackBarServiceService;
+  let snackbar: SnackBarService;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [PhotoComponent, RouterTestingModule.withRoutes(routes), MatSnackBarModule],
       providers: [
         provideMockStore({ initialState }),
-        SnackBarServiceService
+        SnackBarService
       ]
     }).compileComponents();
 
@@ -31,7 +31,7 @@ describe('PhotoComponent', () => {
     component = fixture.componentInstance;
     router = TestBed.inject(Router);
     store = TestBed.inject(Store);
-    snackbar = TestBed.inject(SnackBarServiceService);
+    snackbar = TestBed.inject(SnackBarService);
     fixture.detectChanges();
   });
 

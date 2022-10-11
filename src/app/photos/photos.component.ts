@@ -38,7 +38,7 @@ export class PhotosComponent implements OnInit, AfterViewInit {
       this.fetchNextBatch();
     }, {
       root: this.imageContainerEl.nativeElement,
-      rootMargin: '500px',
+      rootMargin: '50px',
       threshold: 1.0
     });
 
